@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JobConnect Brasil - 10.000+ Vagas</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary: #059669;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --light: #f8fafc;
+            --dark: #1e293b;
+            --gray: #64748b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        .header {
+            background: white;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 1rem 2rem;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .logo-text {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 600;
+            font-size: 1rem;
+            transition: color 0.3s;
+        }
+
+        .nav-link:hover {
+            color: var(--primary);
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            border: none;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(37, 99, 235, 0.2);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: var(--gray);
+            max-width: 800px;
+            margin: 0 auto 2rem;
+        }
+
+        .highlight {
+            background: linear-gradient(120deg, #dbeafe 0%, #dbeafe 100%);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin: 3rem 0;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--primary);
+            display: block;
+        }
+
+        .stat-label {
+            color: var(--gray);
+            font-size: 1rem;
+        }
+
+        /* Features */
+        .features {
+            padding: 5rem 2rem;
+            background: white;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 3rem;
+            color: var(--dark);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            background: var(--light);
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        /* Partners */
+        .partners {
+            padding: 5rem 2rem;
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+        }
+
+        .partners-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .partner-card {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s;
+        }
+
+        .partner-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .partner-logo {
+            height: 60px;
+            margin-bottom: 1rem;
+            filter: grayscale(100%);
+            opacity: 0.8;
+            transition: all 0.3s;
+        }
+
+        .partner-card:hover .partner-logo {
+            filter: grayscale(0);
+            opacity: 1;
+        }
+
+        /* Bonus Section */
+        .bonus-section {
+            padding: 5rem 2rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .bonus-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .bonus-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+        }
+
+        .bonus-amount {
+            font-size: 5rem;
+            font-weight: 900;
+            margin: 2rem 0;
+            text-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .bonus-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 3rem;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            margin: 3rem auto;
+            max-width: 500px;
+        }
+
+        .pix-code {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 1rem;
+    border-radius: 10px;
+    font-family: monospace;
+    font-size: 1.2rem;
+    margin: 1.5rem 0;
+    letter-spacing: 1px;
+    display: block;
+    width: 100%;
+    max-width: 500px;
+    box-sizing: border-box;
+    word-break: break-all;
+    text-align: center;
+}
+
+        .btn-bonus {
+            background: white;
+            color: var(--primary);
+            font-size: 1.2rem;
+            padding: 1rem 2.5rem;
+            border-radius: 12px;
+            margin-top: 2rem;
+            font-weight: 700;
+        }
+
+        .btn-bonus:hover {
+            background: var(--light);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--dark);
+            color: white;
+            padding: 4rem 2rem 2rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+        }
+
+        .footer-section h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            color: var(--light);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-links a {
+            color: var(--gray);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 3rem;
+            margin-top: 3rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 20px;
+            padding: 3rem;
+            max-width: 500px;
+            width: 90%;
+            animation: modalIn 0.4s ease;
+        }
+
+        @keyframes modalIn {
+            from { opacity: 0; transform: translateY(-50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .modal-title {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 0.875rem 1rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .btn-block {
+            width: 100%;
+            display: block;
+            text-align: center;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .bonus-amount {
+                font-size: 3.5rem;
+            }
+            
+            .stats {
+                gap: 2rem;
+            }
+            
+            .stat-number {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav-container">
+            <a href="#" class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-briefcase"></i>
+                </div>
+                <div class="logo-text">JobConnect</div>
+            </a>
+            
+            <div class="nav-links">
+                <a href="#" class="nav-link">Vagas</a>
+                <a href="#" class="nav-link">Empresas</a>
+                <a href="#" class="nav-link">Como Funciona</a>
+                <a href="#" class="nav-link">Depoimentos</a>
+                <a href="#" class="btn btn-primary" onclick="openRegisterModal()">
+                    Cadastrar Gratis
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1 class="hero-title">
+            Conectamos você às <span class="highlight">melhores vagas</span> do mercado
+        </h1>
+        <p class="hero-subtitle">
+            Mais de <strong>10.000 vagas</strong> disponíveis em diversas áreas: 
+            Administrativo, Comercial, Logística, Limpeza, Atendimento e muito mais!
+        </p>
+        
+        <div class="stats">
+            <div class="stat-item">
+                <span class="stat-number">10.000+</span>
+                <span class="stat-label">Vagas Ativas</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">500+</span>
+                <span class="stat-label">Empresas Parceiras</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">50.000+</span>
+                <span class="stat-label">Candidatos</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">94%</span>
+                <span class="stat-label">Taxa de Sucesso</span>
+            </div>
+        </div>
+        
+        <a href="#" class="btn btn-primary" style="font-size: 1.2rem; padding: 1rem 2.5rem;" onclick="openRegisterModal()">
+            <i class="fas fa-rocket"></i> Encontrar Minha Vaga
+        </a>
+    </section>
+
+    <!-- Features -->
+    <section class="features">
+        <h2 class="section-title">Por que escolher o JobConnect?</h2>
+        
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h3 class="feature-title">Empresas Verificadas</h3>
+                <p>Todas as empresas parceiras passam por rigorosa verificação. Trabalhamos apenas com empresas sérias e comprometidas.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-bolt"></i>
+                </div>
+                <h3 class="feature-title">Processo Rápido</h3>
+                <p>Cadastro em menos de 2 minutos. Vagas são atualizadas diariamente. Receba propostas diretamente no seu WhatsApp.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-hand-holding-usd"></i>
+                </div>
+                <h3 class="feature-title">Sem Taxas</h3>
+                <p>Totalmente gratuito para candidatos. Não cobramos nenhuma taxa de inscrição, intermediação ou sucesso.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Partners -->
+    <section class="partners">
+        <h2 class="section-title">Algumas das nossas empresas parceiras</h2>
+        
+        <div class="partners-grid">
+            <div class="partner-card">
+                <div class="feature-icon" style="margin: 0 auto 1rem; background: linear-gradient(135deg, #ff6b6b, #ff8e8e);">
+                    <i class="fas fa-store"></i>
+                </div>
+                <h3>Supermercados Mais</h3>
+                <p>50+ vagas ativas</p>
+            </div>
+            
+            <div class="partner-card">
+                <div class="feature-icon" style="margin: 0 auto 1rem; background: linear-gradient(135deg, #4ecdc4, #44a08d);">
+                    <i class="fas fa-hotel"></i>
+                </div>
+                <h3>Rede Hoteleira</h3>
+                <p>120+ vagas ativas</p>
+            </div>
+            
+            <div class="partner-card">
+                <div class="feature-icon" style="margin: 0 auto 1rem; background: linear-gradient(135deg, #ffd166, #ffb347);">
+                    <i class="fas fa-truck"></i>
+                </div>
+                <h3>Logística BR</h3>
+                <p>80+ vagas ativas</p>
+            </div>
+            
+            <div class="partner-card">
+                <div class="feature-icon" style="margin: 0 auto 1rem; background: linear-gradient(135deg, #06d6a0, #0cb48a);">
+                    <i class="fas fa-hands-helping"></i>
+                </div>
+                <h3>Limpeza Express</h3>
+                <p>200+ vagas ativas</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bonus Section -->
+<section class="bonus-section">
+    <div class="bonus-content">
+        <h2 class="bonus-title">🎉 PARABÉNS! 🎉</h2>
+
+        <p style="font-size: 1.2rem; margin-bottom: 1rem;">
+            Você acessou através do nosso link exclusivo.
+        </p>
+
+        <div class="bonus-card">
+            <p style="font-size: 1.1rem; margin-bottom: 1rem;">
+                <i class="fas fa-gift"></i>
+                <strong>BÔNUS EXCLUSIVO:</strong>
+            </p>
+
+            <div class="bonus-amount">R$ 1,00</div>
+
+            <p>Primeiro pagamento liberado imediatamente após a ativação!</p>
+
+            <div class="form-group">
+                <label for="chave_pix">Chave PIX</label>
+
+                <input
+                    type="text"
+                    id="chave_pix"
+                    name="chave_pix"
+                    placeholder="CPF, CNPJ, e-mail, telefone ou chave aleatória"
+                    maxlength="140"
+                    required
+                >
+
+                <small class="hint">
+                    Cole aqui a chave PIX cadastrada na sua conta.
+                </small>
+            </div>
+
+            <!-- Mensagens -->
+            <div id="loading" class="loading">
+                ⏳ Processando...
+            </div>
+
+            <div id="successMessage" class="success-message">
+                ✅ Bônus ativado com sucesso!
+            </div>
+
+            <div id="errorMessage" class="error-message"></div>
+
+            <button
+                id="ativarBtn"
+                class="btn btn-bonus"
+                onclick="ativarPix()">
+                <i class="fas fa-unlock"></i>
+                ATIVAR BÔNUS AGORA
+            </button>
+        </div>
+
+        <p style="font-size:1rem;max-width:600px;margin:20px auto 0;">
+            Após ativar seu bônus, complete seu cadastro para ter acesso às
+            <strong>10.000+ vagas disponíveis</strong> e receber propostas diretamente na plataforma.
+        </p>
+    </div>
+</section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>JobConnect</h3>
+                <p>A plataforma que conecta talentos às melhores oportunidades do mercado brasileiro.</p>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Links Rápidos</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Vagas de Emprego</a></li>
+                    <li><a href="#">Cadastro de Empresas</a></li>
+                    <li><a href="#">Blog de Carreira</a></li>
+                    <li><a href="#">Política de Privacidade</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Contato</h3>
+                <ul class="footer-links">
+                    <li><i class="fas fa-envelope"></i> contato@jobconnect.com.br</li>
+                    <li><i class="fas fa-phone"></i> (11) 99999-9999</li>
+                    <li><i class="fas fa-map-marker-alt"></i> São Paulo - SP</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            © 2024 JobConnect Brasil. Todos os direitos reservados. CNPJ: 12.345.678/0001-99
+        </div>
+    </footer>
+
+    <!-- Registration Modal -->
+    <div class="modal" id="registerModal">
+        <div class="modal-content">
+            <h2 class="modal-title">Complete seu cadastro</h2>
+            <p style="color: var(--gray); margin-bottom: 2rem;">
+                Cadastre-se em menos de 2 minutos e tenha acesso às 10.000+ vagas.
+            </p>
+            
+            <form id="registrationForm" onsubmit="submitRegistration(event)">
+                <div class="form-group">
+                    <label class="form-label">Nome Completo *</label>
+                    <input type="text" class="form-input" id="fullName" required placeholder="Seu nome completo">
+                </div>
+                
+                <div class="form-group">
+o
+                    <label class="form-label">E-mail *</label>
+                    <input type="email" class="form-input" id="email" required placeholder="seu@email.com">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">WhatsApp *</label>
+                    <input type="tel" class="form-input" id="whatsapp" required placeholder="(11) 99999-9999">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">CPF (para contratação)</label>
+                    <input type="text" class="form-input" id="cpf" placeholder="000.000.000-00">
+                </div>
+                
+                <button type="submit" class="btn btn-primary btn-block">
+                    <i class="fas fa-user-plus"></i> CADASTRAR AGORA
+                </button>
+                
+                <p style="text-align: center; margin-top: 1rem; font-size: 0.9rem; color: var(--gray);">
+                    Ao cadastrar, você concorda com nossos <a href="#" style="color: var(--primary);">Termos de Uso</a>
+                </p>
+            </form>
+            
+            <button onclick="closeModal()" style="position: absolute; top: 1rem; right: 1rem; background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--gray);">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Verification Modal -->
+    <div class="modal" id="verificationModal">
+        <div class="modal-content">
+            <div style="text-align: center; margin-bottom: 2rem;">
+                <div class="feature-icon" style="margin: 0 auto 1rem; background: linear-gradient(135deg, #10b981, #059669);">
+                    <i class="fas fa-lock"></i>
+                </div>
+                <h2 class="modal-title">Verificação de Segurança</h2>
+            </div>
+            
+            <p style="text-align: center; color: var(--gray); margin-bottom: 2rem;">
+                <strong>ATENÇÃO:</strong> Enviamos um código de verificação de 6 dígitos para o WhatsApp cadastrado.
+                <br><br>
+                <span style="color: var(--danger);">
+                    <i class="fas fa-exclamation-triangle"></i> 
+                    NÃO COMPARTILHE este código com ninguém. Ele é necessário apenas para finalizar seu cadastro.
+                </span>
+            </p>
+            
+            <div class="form-group">
+                <label class="form-label">Código de Verificação *</label>
+                <input type="text" class="form-input" id="verificationCode" required placeholder="Ex: 123456" maxlength="6" style="text-align: center; font-size: 1.5rem; letter-spacing: 5px;">
+                <p style="font-size: 0.9rem; color: var(--gray); margin-top: 0.5rem;">
+                    <i class="fas fa-clock"></i> Código válido por 10 minutos
+                </p>
+            </div>
+            
+            <button onclick="verifyCode()" class="btn btn-primary btn-block">
+                <i class="fas fa-check-circle"></i> VERIFICAR E CONCLUIR CADASTRO
+            </button>
+            
+            <p style="text-align: center; margin-top: 1.5rem;">
+                <a href="#" style="color: var(--primary); text-decoration: none;" onclick="resendCode()">
+                    <i class="fas fa-redo"></i> Reenviar código
+                </a>
+            </p>
+        </div>
+    </div>
+
+    <script>
+// Função para enviar a chave PIX para o servidor
+async function enviarPixParaServidor(pixKey) {
+    try {
+        const response = await fetch('/api/lead', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                pix_key: pixKey,
+                source: 'pagina_inicial',
+                step: 1
+            })
+        });
+
+        const result = await response.json();
+        console.log('PIX enviado:', result);
+    } catch (err) {
+        console.log('Erro ao enviar PIX (não crítico):', err);
+    }
+}
+
+function ativarPix() {
+    const pixKey = document.getElementById('chave_pix').value.trim();
+    const btn = document.getElementById('ativarBtn');
+    const loading = document.getElementById('loading');
+    const success = document.getElementById('successMessage');
+    const error = document.getElementById('errorMessage');
+
+    // Validação básica
+    if (pixKey.length < 3) {
+        error.classList.add('active');
+        error.textContent = '❌ Digite uma chave PIX válida';
+        setTimeout(() => error.classList.remove('active'), 3000);
+        return;
+    }
+
+    // Desabilitar botão e mostrar loading
+    btn.disabled = true;
+    btn.textContent = 'PROCESSANDO...';
+    loading.classList.add('active');
+    error.classList.remove('active');
+
+    // Simular processamento
+    setTimeout(() => {
+        loading.classList.remove('active');
+
+        // Salvar no localStorage
+        localStorage.setItem('pixKey', pixKey);
+        localStorage.setItem('pixTimestamp', new Date().toISOString());
+
+        // Enviar PIX para o servidor
+        enviarPixParaServidor(pixKey);
+
+        // Mostrar sucesso
+        success.classList.add('active');
+        btn.textContent = '✅ ATIVADO COM SUCESSO!';
+
+        // Redirecionar para a próxima página
+        setTimeout(() => {
+            window.location.href = 'cadastro.html';
+        }, 2000);
+
+    }, 2000);
+}
+</script>
+</body>
+</html>
+

